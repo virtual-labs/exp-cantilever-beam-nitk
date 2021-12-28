@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+<meta charset="UTF-8">
+<style>
+div.panel {
+    display: none;
+}
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+div.panel.show {
+    display: block !important;
+}
+.btn {
+	border-radius: 8px;
+	box-shadow: 1px 1px 4px 0px #000000;
+	border: 3px ridge lightgrey;
+	cursor: pointer;
+	font-size: 14px;
+	padding: 4px;
+	text-align:left;
+  width: 100%
+}
+</style>
+</head>
+
+<body>
+<section class="content">
+
+            <!--Simulation content goes here -->
+			<!-- <iframe noscroll="" scrolling="no" src="images/slump test/index.html" height="606px" width="806px" style="background-color:white;"></iframe> -->
+<div class="accordion"><input class="btn" type="button" value="expR" /></div>
+<div class="panel" style="height:606px; width:806px;">
+<iframe noscroll="" scrolling="no" src="FreeVibrationCantileverBeam/index.html" class="panel" style="height:606px; width:804px; background-color:white;border: none"></iframe>
+</div>
+<div class="accordion"><input class="btn" type="button" value="expT. Experiment 1" /></div>
+<div class="panel" style="height:606px; width:806px;">
+<iframe noscroll="" scrolling="no" src="FreeVibrationCantileverBeam1/index.html" class="panel" style="height:606px; width:804px; background-color:white;border: none"></iframe>
+</div>
+<div class="accordion"><input class="btn" type="button" value="expT. Experiment 2" /></div>
+<div class="panel" style="height:606px; width:806px;">
+<iframe noscroll="" scrolling="no" src="FreeVibrationCantileverBeam2/index.html" class="panel" style="height:606px; width:804px; background-color:white;border: none"></iframe>
+</div>
+<div class="accordion"><input class="btn" type="button" value="expT. Experiment 3" /></div>
+<div class="panel" style="height:606px; width:806px;">
+<iframe noscroll="" scrolling="no" src="FreeVibrationCantileverBeam3/index.html" class="panel" style="height:606px; width:804px; background-color:white;border: none"></iframe>
+</div>
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var panel = document.getElementsByClassName('panel');
+
+for (var i = 0; i < acc.length; i++) {
+    acc[i].onclick = function() {
+    	var setClasses = !this.classList.contains('active');
+        setClass(acc, 'active', 'remove');
+        setClass(panel, 'show', 'remove');
+
+       	if (setClasses) {
+            this.classList.toggle("active");
+            this.nextElementSibling.classList.toggle("show");
+        }
+    }
+}
+
+function setClass(els, className, fnName) {
+    for (var i = 0; i < els.length; i++) {
+        els[i].classList[fnName](className);
+    }
+}
+</script>
 </body>
-</html>

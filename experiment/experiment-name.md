@@ -1,1 +1,1 @@
-## Experiment name
+## Free vibration of cantilever beam
