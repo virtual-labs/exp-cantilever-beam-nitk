@@ -9,8 +9,8 @@ Begin the experiment by clicking the start experiment button.
 
 [<img src="./images/proc2.png" width="100" height="50" />](./images/proc2.png)
 
-Here x<sub>1</sub> and x<sub>n</sub> refer to the displacements at the first and nth peak in the displacement v/s time graph.
-The displacements at the peaks can be found using the location slider.
+Here x<sub>1</sub> and x<sub>n</sub> refer to the displacements at the first and nth peak in the displacement v/s time graph.  
+The displacements at the peaks can be found using the location slider.  
 [<img src="./images/proc3.png" width="800" height="600" />](./images/proc3.png)
 
 [<img src="./images/proc4.png" width="800" height="600" />](./images/proc4.png)
