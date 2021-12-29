@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/MOMstyle.css" />
+    <script src='./js/jquery.min.js'></script>
+    <script src='./js/jquery-ui.min.js'></script>
+    <script src='./js/script.js'></script>   	
+ </head>
+
+ <body onload="startsim(); varinit();">
+    <title>Cantilever Beam-Free Vibration</title>
+    <!-- Defining Container for Simulation -->
+    <div id="container">
+        <!-- Replace TITLE with simulation title to be displayed next to logo-->
+        <div id="simtitle">SINGLE DEGREE OF FREEDOM SYSTEM</div>
+        <!-- Region for simulation display -->
+        <canvas id="simscreen" height="400px" width="550px"></canvas>
+        <!-- Region for graph display -->
+        <canvas id="graphscreen" height="400px" width="550px"></canvas>
+        <!-- Cross section display -->
+        <div id="crosssection"><img id="crosssec" title="" src="./images/crossI.PNG"/><img id="massSystem" src="./images/massSystem.PNG" title=""/></div>
+        <div id="textonarea"><p style="font-size: 20px" id="text1"></p>
+            <p style="font-size: 20px" id="text2"></p>
+        </div>
+        <div id="titleincanvas">Cantilever Beam-Free Vibration</div>
+        <!-- Region for result display -->
+        <div id="commentboxleft">
+            <p id="quest"></p>
+        </div>
+        <div id="commentboxright">
+            <input id="checkint" style="visibility: hidden;"><br>
+            <button id="checkbtn" style="visibility: hidden;" onclick="checkans()">Check</button>
+            <img id="resultimg" src="./images/tick (2).png">
+        </div>
+        <!-- DND-Title of region for variables display -->
+        <div id="vartitle">VARIABLES</div>
+        <!-- Region for Input parameters of simulation -->
+        <div id="variables">
+            <div class="variable">
+            <div class="constvariables">
+                <p class="title">Material</p>
+                <p class="values" id="matname">Steel</p>
+                <p class="title">Cross Section</p>
+                <p class="values" id="secname">I section</p>
+                <p class="title" style="text-align: left;">Length(mm)<span style="font-weight:normal;" id="lengthtxt"> 1500</span></p>
+                <p class="title" style="text-align: left;">Damping Ratio<span style="font-weight:normal;" id="damptxt"> 0.05</span></p>
+                <p class="title" style="text-align: left;">End Mass(kg)</p>
+            </div>         
+            </div>
+        </div>
+        <!-- DND-Title of region for controls display -->
+    <div id="ctrltitle">CONTROLS</div>
+        <!-- DND-Copyright display-->
+    <div id="copyright" title="Developer : SOLVEr"> Copyright &copy; SOLVE The Virtual Lab @ NITK Surathkal </div>
+    <div id="controls">
+        <!-- Region for User controls of simulation -->
+        <img id="playpausebutton" onclick="simstate()" src="./images/blueplaydull.png" />
+	<button id="startexpbtn" onclick="changescreen()">Start Experiment </button>
+	<button id="restexpbtn" onclick="changescreen()" style="visibility: hidden;">Restart Experiment</button>
+    </div>
+    <img src="./images/slidergraph.PNG" style="visibility:hidden" id="slidergraph">
+    <img src="./images/beam.png" width="200" style="visibility:hidden" id="beamimg">
+    <div id="constraintbox" style="visibility: hidden;"></div>
+    </div> <!-- Container div close -->
+
+ </body>
+</html>
