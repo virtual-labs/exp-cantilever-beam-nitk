@@ -4,10 +4,10 @@
 
 After completing this simulation experiment on free vibration of a cantilever beam one should be able to:
 
-- Model a given real system to an equivalent simplified model of a cantilever beam with suitable assumptions / idealizations.
-- Calculate the logarithmic decrement, damping ratio, damping frequency and natural frequency of the system
-- Find the stiffness and the critical damping of the system.
-- Calculate damping coefficient of the system.
+<li> Model a given real system to an equivalent simplified model of a cantilever beam with suitable assumptions / idealizations.</li>
+<li> Calculate the logarithmic decrement, damping ratio, damping frequency and natural frequency of the system</li>
+<li> Find the stiffness and the critical damping of the system.</li>
+<li> Calculate damping coefficient of the system.</li>
 
 **Introduction**
 
