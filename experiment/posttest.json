@@ -19,23 +19,6 @@
       "difficulty": ""
     },
     {
-      "question": "If energy is lost in any way during vibration, the system can be considered to be ?",
-      "answers": {
-        "a": "undamped",
-        "b": "damped",
-        "c": "underdamped",
-        "d": "overdamped"
-      },
-      "explanations": {
-        "a": "",
-        "b": "",
-        "c": "",
-        "d": ""
-      },
-      "correctAnswer": "b",
-      "difficulty": ""
-    },
-    {
       "question": "The amplitude of an undamped system will not change with time.",
       "answers": {
         "a": "true",
