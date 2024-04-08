@@ -1,13 +1,11 @@
-
-var beaminf=[
+var beaminf = [
   "ISMB 100\n h=100 mm,b=75 mm\n t1=4 mm,t2=7 mm\nIxx=257.5 cm^4\nIyy=40.8 cm^4\nA=14.6 cm^2",
   "ISNT 150\n h=150 mm,b=150 mm\n t1=10 mm,t2=10 mm\nIxx=541.1 cm^4\nIyy=250.3 cm^4\nA=28.88 cm^2",
   "ISMC 100\n h=100 mm,b=50 mm\n t1=4.7 mm,t2=7.5 mm\nIxx=186.7 cm^4\nIyy=25.9 cm^4\nA=11.7 cm^2",
   "ISA 100100\n h=100 mm,b=100 mm\n t=12 mm\nIxx=207 cm^4\nIyy=207 cm^4\nA=22.59 cm^2",
   "SQUARE\n h=150 mm,b=150 mm\n Ixx=4218.75 cm^4\nIyy=4218.75 cm^4\nA=225 cm^2",
-  "CIRCLE\n D=150 mm\n Ixx=2485.05 cm^4\nIyy=2485.05 cm^4\nA=176.72 cm^2"
+  "CIRCLE\n D=150 mm\n Ixx=2485.05 cm^4\nIyy=2485.05 cm^4\nA=176.72 cm^2",
 ];
-
 
 // simulation variables
 let time = 0; //keeps track of the time of the animation
@@ -15,16 +13,16 @@ let beamlength = 1500; //Length of the beam inmm
 let simTimeId; //for animation function
 let pauseTime; //for running animation when simulation is paused
 let rho = 7750; //Density in kg/m^3
-let A = 14.6E-4; //Area in m^2
-var massbeam=33/140*rho*A*beamlength/1000; //Mass of the beam=volume * density
-let E = 200E9; //Young's Modulus
-let I = 4.08E-7; //Ixx value
+let A = 14.6e-4; //Area in m^2
+var massbeam = ((33 / 140) * rho * A * beamlength) / 1000; //Mass of the beam=volume * density
+let E = 200e9; //Young's Modulus
+let I = 4.08e-7; //Ixx value
 let dampingratio = 0;
 let endmass = 25;
 let m = (33 / 140) * massbeam + endmass;
 let k = (3 * E * I) / Math.pow(beamlength / 1000, 3); //Stiffness value for a cantilever beam
 let wn = Math.sqrt(k / m); //Natural Frequency
-console.log(wn);
+// console.log(wn);
 let wd = wn * Math.sqrt(1 - dampingratio * dampingratio); //Damped natural frequency
 let initdisp = 500; //Initial displacement given to the beam
 let simstatus;
@@ -32,18 +30,17 @@ let offsetX = 20;
 
 // var questionstate = 1;
 var secname = "I section";
-var matname =  "Steel";
+var matname = "Steel";
 // canvas variables
 // graphics
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
-const tooltip = document.getElementById('tooltip');
-
+const tooltip = document.getElementById("tooltip");
 
 // graph1
 const graphCanvas1 = document.querySelector("#graphscreen1");
 const graphctx1 = graphCanvas1.getContext("2d");
-const coordinatesElement = document.getElementById('coordinates');
+const coordinatesElement = document.getElementById("coordinates");
 //  graph2
 const graphCanvas2 = document.querySelector("#graphscreen2");
 const graphctx2 = graphCanvas2.getContext("2d");
@@ -65,10 +62,7 @@ const materials = document.querySelector("#materials");
 const sections = document.querySelector("#sections");
 const otherSec = document.querySelector(".other-sec");
 
-
-
 //Function to calculate the displacement
-
 
 const actdisplace = function (t) {
   let value =
@@ -80,7 +74,7 @@ const actdisplace = function (t) {
 var disptime = 0;
 var dispdisp = actdisplace(disptime);
 var xaxis;
-console.log(dispdisp);
+// console.log(dispdisp);
 
 //start of simulation here; starts the timer with increments of 0.01 seconds
 function startsim() {
@@ -113,31 +107,28 @@ function simstate() {
   }
 }
 
-
 //Initialise system parameters here
 function varinit() {
-  endmass = 25;//Updating variables
+  endmass = 25; //Updating variables
   beamlength = 1500;
-  dampingratio =0.05;
+  dampingratio = 0.05;
   varchange();
 
-  $( "#slidergraph" ).draggable({axis: "x",
-  containment: "#constraintbox",
-  drag:function(){printcordinates($("#slidergraph").position().left);},
+  $("#slidergraph").draggable({
+    axis: "x",
+    containment: "#constraintbox",
+    drag: function () {
+      printcordinates($("#slidergraph").position().left);
+    },
   });
-  
- console.log(disptime);
- console.log(dispdisp);
 
- 
+  // console.log(disptime);
+  // console.log(dispdisp);
 }
 function varchange() {
   varupdate();
-
 }
 function varupdate() {
-
-
   massbeam = (rho * A * beamlength) / 1000;
   m = (33 / 140) * massbeam + endmass;
   k = (3 * E * I) / Math.pow(beamlength / 1000, 3);
@@ -146,7 +137,6 @@ function varupdate() {
   let c = dampingratio * cc;
   wd = wn * Math.sqrt(1 - dampingratio * dampingratio);
 
-  
   document.getElementById("matname").innerHTML = matname;
   document.getElementById("secname").innerHTML = secname;
   document.getElementById("lengthtxt").innerHTML = beamlength;
@@ -155,16 +145,15 @@ function varupdate() {
     4
   )}Ns/m \n <br> k = ${(k / 1000).toFixed(4)}N/mm
   `;
-  cirTooltip1.innerHTML = 'Note: Hover on the graph to display the Displacement and Time';
- 
+  cirTooltip1.innerHTML =
+    "Note: Hover on the graph to display the Displacement and Time";
+
   if (!simstatus) {
     //Disabling the slider,spinner and drop down menu
-
   }
   //If simulation is stopped
   if (simstatus) {
     //Enabling the slider,spinner and drop down menu
-
   }
   draw();
   generateGraph();
@@ -254,15 +243,13 @@ const draw = function () {
   generateGraph();
 };
 
-function generateGraph( x, y) {
+function generateGraph(x, y) {
   // Graph 1
-
 
   let graph1X = setMediaQueries(graphctx1);
   graphctx1.canvas.width = document.documentElement.clientWidth * scaleX;
   graphctx1.canvas.height = document.documentElement.clientHeight * scaleY;
   graphctx1.clearRect(0, 0, graphCanvas1.width, graphCanvas1.height);
-
 
   graphctx1.font = "2rem Comic sans MS";
   graphctx1.save();
@@ -277,7 +264,7 @@ function generateGraph( x, y) {
   graphctx1.lineTo(20, 350);
   graphctx1.moveTo(20, 225);
   graphctx1.lineTo(graphCanvas1.width, 225);
-  graphctx1.moveTo(20,350)
+  graphctx1.moveTo(20, 350);
   graphctx1.lineTo(graphCanvas1.width, 350);
 
   graphctx1.strokeStyle = "black";
@@ -289,25 +276,23 @@ function generateGraph( x, y) {
   let i = 0;
   graphctx1.strokeStyle = "green";
   graphctx1.lineWidth = 1;
-  while (i < graphCanvas1.width ) {
+  while (i < graphCanvas1.width) {
     graphctx1.lineTo(i + 20, 225 - (0.9 * actdisplace(0.003 * i)) / 5);
     graphctx1.moveTo(i + 20, 225 - (0.9 * actdisplace(0.003 * i)) / 5);
     i += 0.01;
   }
   graphctx1.stroke();
- 
-  graphctx1.font='12px Nunit';
 
-          
-            graphctx1.font='16px Comic Sans MS';
-            let dispstr = "Displacement: " + (dispdisp/5).toFixed(2) + " mm";
-          
-            let timestr = "Time: " + (disptime*1000).toFixed(2) + " ms";
-          
-            graphctx1.fillText(dispstr,10,370);
-            graphctx1.fillText(timestr,240,370);
+  graphctx1.font = "12px Nunit";
 
-       
+  graphctx1.font = "16px Comic Sans MS";
+  let dispstr = "Displacement: " + (dispdisp / 5).toFixed(2) + " mm";
+
+  let timestr = "Time: " + (disptime * 1000).toFixed(2) + " ms";
+
+  graphctx1.fillText(dispstr, 10, 370);
+  graphctx1.fillText(timestr, 240, 370);
+
   // Graph 2
   let graph2X = setMediaQueries(graphctx2);
   graphctx2.canvas.width = document.documentElement.clientWidth * scaleX;
@@ -350,16 +335,16 @@ function generateGraph( x, y) {
   graphctx2.fillText("\u03C9d= " + wd.toFixed(3) + "rad/s", 260, 300);
 
   graphctx1.beginPath();
-  graphctx1.strokeStyle= "black";
+  graphctx1.strokeStyle = "black";
   graphctx1.moveTo(x, y);
-  graphctx1.lineTo(x , y + 70);
+  graphctx1.lineTo(x, y + 70);
   graphctx1.stroke();
-
 }
- // Function to get mouse coordinates relative to the canvas
- function getCoordinates(event) {
+// Function to get mouse coordinates relative to the canvas
+function getCoordinates(event) {
   const rect = graphCanvas1.getBoundingClientRect();
-  const clientX = event.clientX - offsetX|| (event.touches && event.touches[0].clientX);
+  const clientX =
+    event.clientX - offsetX || (event.touches && event.touches[0].clientX);
   const clientY = event.clientY || (event.touches && event.touches[0].clientY);
   const x = clientX - rect.left;
   const y = clientY - rect.top;
@@ -368,108 +353,91 @@ function generateGraph( x, y) {
 function handleMove(event) {
   const { x, y } = getCoordinates(event);
 
- 
-  var xaxis =  ` ${x.toFixed(2)}`;
+  var xaxis = ` ${x.toFixed(2)}`;
 
-  disptime = 0.9/295*(xaxis-28);
-  dispdisp = actdisplace(disptime) 
- 
-
-
-  
+  disptime = (0.9 / 295) * (xaxis - 28);
+  dispdisp = actdisplace(disptime);
 }
 function handleKeyPress(event) {
   // Check if the pressed key is "Enter"
-  if (event.key === 'Enter') {
-      // Perform your desired action here
-      checkans();
+  if (event.key === "Enter") {
+    // Perform your desired action here
+    checkans();
   }
 }
 
 function handleEnd() {
-  tooltip.style.display = 'none';
+  tooltip.style.display = "none";
 }
 
-graphCanvas1.addEventListener('mousemove', handleMove);
-graphCanvas1.addEventListener('touchmove', handleMove);
-graphCanvas1.addEventListener('mouseout', handleEnd);
-graphCanvas1.addEventListener('touchend', handleEnd);
- function toggleImg(){
-
+graphCanvas1.addEventListener("mousemove", handleMove);
+graphCanvas1.addEventListener("touchmove", handleMove);
+graphCanvas1.addEventListener("mouseout", handleEnd);
+graphCanvas1.addEventListener("touchend", handleEnd);
+function toggleImg() {
   var cross = document.getElementById("cross");
-  cross.style.display = (cross.style.display === "none") ? "block" : "none";
+  cross.style.display = cross.style.display === "none" ? "block" : "none";
 
   var beam = document.getElementById("beam");
-  beam.style.display = (beam.style.display === "none") ? "block" : "none";
+  beam.style.display = beam.style.display === "none" ? "block" : "none";
 
-  document.getElementById("checkint").value="";
-  document.getElementById("checksapn").innerHTML="";
- 
+  document.getElementById("checkint").value = "";
+  document.getElementById("checksapn").innerHTML = "";
+
   var nextbutton = document.getElementById("screenchangesforward");
-  nextbutton.style.display = (nextbutton.style.display === "none") ? "block" : "none";
+  nextbutton.style.display =
+    nextbutton.style.display === "none" ? "block" : "none";
 
   var restart = document.getElementById("restart1");
-  restart.style.display = (restart.style.display === "none") ? "block" : "none";
- 
-  
-
-
+  restart.style.display = restart.style.display === "none" ? "block" : "none";
 }
 $("#graphbutton").click(function () {
-  console.log("clicked");
+  // console.log("clicked");
 });
-function checkans(){
+function checkans() {
   let intvalue = document.getElementById("checkint");
-  let logdecr = (2*Math.PI*dampingratio)/(Math.sqrt(1-dampingratio*dampingratio));
-  console.log(logdecr);
-  let ans = parseFloat(intvalue.value)
+  let logdecr =
+    (2 * Math.PI * dampingratio) / Math.sqrt(1 - dampingratio * dampingratio);
+  // console.log(logdecr);
+  let ans = parseFloat(intvalue.value);
   // let resultimg = document.getElementById("checksapn");
-  if(ans.toFixed(1)==logdecr.toFixed(1)){
-    document.getElementById("checksapn").innerHTML = "<span style='color:green'>&#10004;</span>";
-      
-  }
-  else{
-    document.getElementById("checksapn").innerHTML = "<span style='color:red'>&#10008;</span>";
+  if (ans.toFixed(1) == logdecr.toFixed(1)) {
+    document.getElementById("checksapn").innerHTML =
+      "<span style='color:green'>&#10004;</span>";
+  } else {
+    document.getElementById("checksapn").innerHTML =
+      "<span style='color:red'>&#10008;</span>";
   }
 }
 function plotgraph() {
-  endmass = 25;//Updating variables
+  endmass = 25; //Updating variables
   beamlength = 1500;
-  dampingratio =0.05;
-   secname = "I section";
-   matname =  "Steel";
+  dampingratio = 0.05;
+  secname = "I section";
+  matname = "Steel";
   const graphDiv = document.querySelectorAll(".graph-div");
 
   graphDiv.forEach((graph) => {
     graph.classList.toggle("display-hide");
-   
   });
   generateGraph();
   graphDiv[0].scrollIntoView({
     behavior: "smooth",
   });
 }
-function changescreen1(){
-  const canvasDiv= document.querySelectorAll(".canvas__div");
+function changescreen1() {
+  const canvasDiv = document.querySelectorAll(".canvas__div");
 
   canvasDiv.forEach((canvas) => {
     canvas.classList.toggle("display-hide");
-    
-  })
+  });
   draw();
-
-  
 }
-function printcordinates(x,xaxisValue){
-
-  console.log(xaxisValue  );
-  disptime = 0.9/295*(x-28);
-  dispdisp = actdisplace(disptime) 
-
-
+function printcordinates(x, xaxisValue) {
+  // console.log(xaxisValue);
+  disptime = (0.9 / 295) * (x - 28);
+  dispdisp = actdisplace(disptime);
 }
-
-  
 
 window.addEventListener("load", varinit);
 
@@ -518,89 +486,81 @@ const selectSection = function () {
     });
   }
 };
-function randomize(){
+function randomize() {
   disptime = 0;
   dispdisp = 500;
-  document.getElementById("checkint").value="";
-  document.getElementById("checksapn").innerHTML="";
-  let areano  =  Math.floor(Math.random() * 6);
+  document.getElementById("checkint").value = "";
+  document.getElementById("checksapn").innerHTML = "";
+  let areano = Math.floor(Math.random() * 6);
   switch (areano) {
-      //I section
+    //I section
     case 0:
+      A = 14.6e-4;
+      I = 257.5e-8;
+      secname = "I section";
 
-        A=14.6E-4;
-        I=257.5E-8;
-        secname = "I section"
-       
-       break;
+      break;
 
-       //T section
+    //T section
     case 1:
-      
-        A=28.88E-4;
-        I=541.1E-8;
-        secname = "T section"
-        break;
+      A = 28.88e-4;
+      I = 541.1e-8;
+      secname = "T section";
+      break;
 
-        //C section
+    //C section
     case 2:
-     
-        A=11.7E-4;
-        I=186.7E-8;
-        secname = "C section"
-       break;
+      A = 11.7e-4;
+      I = 186.7e-8;
+      secname = "C section";
+      break;
 
-       //L section
+    //L section
     case 3:
-    
-        A=22.59E-4;
-        I=207E-8;
-        secname = "L section"
-       break;
+      A = 22.59e-4;
+      I = 207e-8;
+      secname = "L section";
+      break;
 
-       //Sqr section
+    //Sqr section
     case 4:
-  
-        A=225E-4;
-        I=4218.75E-8;
-        secname = "Square section"
-       break;
+      A = 225e-4;
+      I = 4218.75e-8;
+      secname = "Square section";
+      break;
 
-       //Circular section
+    //Circular section
     case 5:
-      
-        A=176.72E-4;
-        I=2485.05E-8;
-        secname = "Circular section"
-       break;  
- }
-let matno = Math.floor(Math.random() * 3)
-switch (matno){
-   //Steel
-case 0:
-    E=200E9;
-    rho=7750;
-    matname = "Steel";
-    break;
+      A = 176.72e-4;
+      I = 2485.05e-8;
+      secname = "Circular section";
+      break;
+  }
+  let matno = Math.floor(Math.random() * 3);
+  switch (matno) {
+    //Steel
+    case 0:
+      E = 200e9;
+      rho = 7750;
+      matname = "Steel";
+      break;
     //Aluminium
-case 1:
-    E=70.33E9;
-    rho=2712;
-    matname = "Aluminium";
-    break;
+    case 1:
+      E = 70.33e9;
+      rho = 2712;
+      matname = "Aluminium";
+      break;
     //Bronze
-case 2:
-    E=111.006E9;
-    rho=8304;
-    matname = "Bronze";
-    break;
-
-}
-beamlength =  Math.floor(Math.random() * (2001)) + 1000;
-console.log(beamlength);
-endmass =  Math.floor(Math.random() * (200));
-dampingratio = (Math.random()*0.5).toFixed(2);
-
+    case 2:
+      E = 111.006e9;
+      rho = 8304;
+      matname = "Bronze";
+      break;
+  }
+  beamlength = Math.floor(Math.random() * 2001) + 1000;
+  // console.log(beamlength);
+  endmass = Math.floor(Math.random() * 200);
+  dampingratio = (Math.random() * 0.5).toFixed(2);
 }
 
 const selectMaterial = function () {
@@ -619,4 +579,3 @@ const selectMaterial = function () {
   }
   varupdate();
 };
-
