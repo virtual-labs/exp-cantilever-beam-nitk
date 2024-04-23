@@ -122,8 +122,8 @@ function varinit() {
     },
   });
 
-  // console.log(disptime);
-  // console.log(dispdisp);
+  console.log(disptime);
+  console.log(dispdisp);
 }
 function varchange() {
   varupdate();
@@ -388,7 +388,7 @@ function handleMove(event) {
 
   disptime = (0.9 / 295) * (xaxis - 28);
   dispdisp = actdisplace(disptime);
-  // console.log(dispdisp);
+  console.log(dispdisp);
 }
 // function drawGraph(x, y) {
 //   // Add your graph drawing logic here, using the adjusted x value
@@ -426,7 +426,7 @@ function toggleImg() {
   restart.style.display = restart.style.display === "none" ? "block" : "none";
 }
 $("#graphbutton").click(function () {
-  // console.log("c/licked");
+  console.log("clicked");
 });
 // Get the input element
 const checkintInput = document.getElementById("checkint");
@@ -447,7 +447,7 @@ function checkans() {
 
   // Convert dampingratio to a number
   let dampingRatioNumber = parseFloat(dampingratio);
-  // console.log("Damping Ratio:", dampingRatioNumber);
+  console.log("Damping Ratio:", dampingRatioNumber);
 
   // Check if the answer matches the damping ratio
   if (ans.toFixed(1) === dampingRatioNumber.toFixed(1)) {
@@ -487,11 +487,11 @@ function printcordinates(x, xaxisValue) {
   // const {x}  = getCoordinates(event);
 
   xaxisValue = ` ${x.toFixed(2)}`;
-  // console.log(xaxisValue);
+  console.log(xaxisValue);
   // disptime = 0.9/295*(x-28);
   // dispdisp = actdisplace(disptime)
 
-  // console.log(dispdisp);
+  console.log(dispdisp);
 }
 
 window.addEventListener("load", varinit);
@@ -614,7 +614,7 @@ function randomize() {
       break;
   }
   beamlength = Math.floor(Math.random() * 2001) + 1000;
-  // console.log(beamlength);
+  console.log(beamlength);
   endmass = Math.floor(Math.random() * 200);
   dampingratio = (Math.random() * 0.5).toFixed(2);
   // let lengthtxt = document.getElementById("lengthtxt");

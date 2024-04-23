@@ -104,7 +104,7 @@ var A = 14.6e-4; //Area in m^2
 var massbeam = (rho * A * beamlength) / 1000; //Mass of the beam=volume * density
 
 var E = 200e9; //Young's Modulus
-var I = 257.5e-8; //Ixx value
+var I= 257.5e-8; //Ixx value
 var dampingratio = 0;
 var endmass = 5;
 var m = (33 / 140) * massbeam + endmass;
@@ -157,7 +157,7 @@ const actdisplace = function (t) {
 
 //start of simulation here; starts the timer with increments of 0.01 seconds
 function startsim() {
-  simTimeId = setInterval("time=time+0.01; varupdate(); ", "100");
+  simTimeId=setInterval("time=time+0.01; varupdate(); ",'100');
   // pauseTime = setInterval("varupdate();", "100");
   // simstatus = 1;
 }
@@ -269,7 +269,7 @@ function varupdate() {
   m = (33 / 140) * massbeam + endmass;
   // console.log(massbeam);
   // console.log(beamlength);
-  // console.log("I="+ I);
+  console.log("I="+ I);
   // console.log("beam"+ beamlength);
   k = (3 * E * I) / Math.pow(beamlength / 1000, 3);
   // console.log(k);
@@ -417,7 +417,7 @@ function generateGraph() {
   graphctx1.fillText("Time", 150, 250);
   graphctx1.beginPath();
 
-  graphctx1.moveTo(20, 20); //changed
+  graphctx1.moveTo(20, 20);//changed
   graphctx1.lineTo(20, 250);
   graphctx1.moveTo(20, 125);
   graphctx1.lineTo(graphCanvas1.width, 125);
@@ -481,7 +481,7 @@ function generateGraph() {
 
 function plotgraph() {
   const graphDiv = document.querySelectorAll(".graph-div");
-  // console.log(graphDiv);
+  console.log(graphDiv);
   graphDiv.forEach((graph) => {
     graph.classList.toggle("display-hide");
   });
@@ -559,5 +559,5 @@ const selectMaterial = function () {
 materials.addEventListener("change", selectMaterial);
 function validateNumber(input) {
   // Replace non-numeric characters with empty string
-  input.value = input.value.replace(/[^0-9]/g, "");
+  input.value = input.value.replace(/[^0-9]/g, '');
 }
