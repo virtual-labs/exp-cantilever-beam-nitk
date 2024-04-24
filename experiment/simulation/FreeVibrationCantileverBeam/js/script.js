@@ -104,7 +104,7 @@ var A = 14.6e-4; //Area in m^2
 var massbeam = (rho * A * beamlength) / 1000; //Mass of the beam=volume * density
 
 var E = 200e9; //Young's Modulus
-var I= 257.5e-8; //Ixx value
+var I = 257.5e-8; //Ixx value
 var dampingratio = 0;
 var endmass = 5;
 var m = (33 / 140) * massbeam + endmass;
@@ -135,6 +135,8 @@ let mediaQuery1 = window.matchMedia("screen and (max-width: 540px)");
 let mediaQuery2 = window.matchMedia("screen and (max-width: 704px)");
 let mediaQuery3 = window.matchMedia("screen and (max-width: 820px)");
 let mediaQuery4 = window.matchMedia("screen and (max-width: 912px)");
+let mediaQuery5 = window.matchMedia("screen and (max-width: 1200px)");
+let mediaQuery6 = window.matchMedia("screen and (max-width: 1400px)");
 let scaleX = 0.5;
 let scaleY = 0.5;
 
@@ -157,7 +159,7 @@ const actdisplace = function (t) {
 
 //start of simulation here; starts the timer with increments of 0.01 seconds
 function startsim() {
-  simTimeId=setInterval("time=time+0.01; varupdate(); ",'100');
+  simTimeId = setInterval("time=time+0.01; varupdate(); ", "100");
   // pauseTime = setInterval("varupdate();", "100");
   // simstatus = 1;
 }
@@ -269,7 +271,7 @@ function varupdate() {
   m = (33 / 140) * massbeam + endmass;
   // console.log(massbeam);
   // console.log(beamlength);
-  console.log("I="+ I);
+  // console.log("I="+ I);
   // console.log("beam"+ beamlength);
   k = (3 * E * I) / Math.pow(beamlength / 1000, 3);
   // console.log(k);
@@ -332,11 +334,19 @@ const setMediaQueries = function (ctx) {
   } else if (mediaQuery3.matches) {
     scaleX = 1;
     originalX = canvas.width / 4 - 10;
-    scaleY = 0.4;
+    scaleY = 0.6;
   } else if (mediaQuery4.matches) {
     scaleX = 1;
     originalX = canvas.width / 4 - 10;
-    scaleY = 0.4;
+    scaleY = 0.6;
+  } else if (mediaQuery5.matches) {
+    scaleX = 1;
+    originalX = canvas.width / 4 - 10;
+    scaleY = 0.6;
+  } else if (mediaQuery6.matches) {
+    scaleX = 0.4;
+    originalX = canvas.width / 4 - 10;
+    scaleY = 0.5;
   } else {
     // originalX = canvas.width / 4 - 20;
     scaleX = 0.3;
@@ -417,7 +427,7 @@ function generateGraph() {
   graphctx1.fillText("Time", 150, 250);
   graphctx1.beginPath();
 
-  graphctx1.moveTo(20, 20);//changed
+  graphctx1.moveTo(20, 20); //changed
   graphctx1.lineTo(20, 250);
   graphctx1.moveTo(20, 125);
   graphctx1.lineTo(graphCanvas1.width, 125);
@@ -455,7 +465,7 @@ function generateGraph() {
   graphctx2.rotate(-Math.PI / 2);
   graphctx2.fillText("Amplitude", 170, 5);
   graphctx2.restore();
-  graphctx2.fillText("Frequency(rad/s)", 10, 280);
+  graphctx2.fillText("Frequency(rad/s)", 20, 250);
   graphctx2.strokeStyle = "#800080";
   graphctx2.lineWidth = 1;
   graphctx2.moveTo(350, 345);
@@ -481,7 +491,7 @@ function generateGraph() {
 
 function plotgraph() {
   const graphDiv = document.querySelectorAll(".graph-div");
-  console.log(graphDiv);
+  // console.log(graphDiv);
   graphDiv.forEach((graph) => {
     graph.classList.toggle("display-hide");
   });
@@ -559,5 +569,5 @@ const selectMaterial = function () {
 materials.addEventListener("change", selectMaterial);
 function validateNumber(input) {
   // Replace non-numeric characters with empty string
-  input.value = input.value.replace(/[^0-9]/g, '');
+  input.value = input.value.replace(/[^0-9]/g, "");
 }

@@ -226,6 +226,10 @@ em:current font size
     position:relative;
     top: -46rem;
   }
+  .graph-div{
+    margin-bottom: -135px;
+  
+  }
 }
 
 /* **************************** */
@@ -305,6 +309,10 @@ em:current font size
     position: relative;
     top: -34rem;
     width: 327px;
+}
+.graph-div{
+  margin-bottom: -100px;
+
 }
 }
 

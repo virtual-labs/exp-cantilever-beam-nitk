@@ -15,6 +15,10 @@ em:current font size
     top: 46rem;
     max-width: 300px;
   }
+  .graph-div{
+    margin-bottom: -50px;
+  
+  } 
 }
 
 /* **************************** */
@@ -75,6 +79,11 @@ em:current font size
     position: absolute;
     top: 50rem;
   }
+  /* .graph-div{
+    margin-bottom: -50px;
+  
+  }  */
+
   
 }
 
@@ -177,6 +186,10 @@ em:current font size
     position: absolute;
     top: 74rem;
   }
+  .graph-div{
+    margin-bottom: 30px;
+  
+  }
 }
 
 /* **************************** */
@@ -206,6 +219,11 @@ em:current font size
   .cir-tooltip1 {
     position: absolute;
     top: 74rem;
+  }
+  .graph-div{
+    margin-bottom: 16px;
+    
+  
   }
 }
 
@@ -260,6 +278,12 @@ em:current font size
     top: 79rem;
 
   }
+  .graph-div{
+    margin-bottom: -36px;
+    
+  
+  }
+
 }
 
 /* **************************** */
@@ -356,6 +380,11 @@ em:current font size
    
  
 }
+.graph-div{
+  margin-bottom: -50px;
+  
+
+}
 }
 
 
@@ -364,6 +393,11 @@ em:current font size
     position: absolute;
     top: 66rem;
     font-size: 1rem;
+}
+.graph-div{
+  margin-bottom: -50px;
+  
+
 }
 }
 
@@ -377,6 +411,12 @@ em:current font size
     top: 65rem;
     font-size: 1rem;
   }
+  .graph-div{
+    margin-bottom: -30px;
+    
+    
+  
+  }
 }
 
 @media (max-width: 20em) {
@@ -385,6 +425,10 @@ em:current font size
     left: 2px;
     top: 61rem;
     font-size: 1rem;
+}
+.graph-div{
+  margin-bottom: -30px;
+  
 }
 }
 
