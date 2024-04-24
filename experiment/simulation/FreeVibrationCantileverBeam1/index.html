@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SOLVE-MDMV-Single Degree of Freedom System</title>
-
+    <title>SOLVE</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,7 +18,7 @@
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/query.css" />
-
+    <!-- <script defer src="https://code.jquery.com/jquery.min.js"></script> -->
     <script
       defer
       src="https://code.jquery.com/jquery-3.7.0.min.js"
@@ -47,7 +49,10 @@
     <div class="title-div-container">
 
       <div class="title-div">
-      
+        <!-- <span class="round left-top"></span>
+          <span class="round left-bottom"></span>
+          <span class="round right-top"></span>
+          <span class="round right-bottom"></span> -->
           <div class="logo-div">
             <a href="#"><img src="images/logo_nitk.png" alt="Logo" class="logo" /></a>
           </div>
@@ -141,7 +146,10 @@
       <div class="main">
         <div class="main-section">
           <div id="simulation" class="main__task-div">
-            
+            <!-- <div id="controls" class="div__control">
+              <img id="playpausebutton" onclick="simstate()" src="./images/blueplaydull.svg" alt="" />
+              <img id="graphbutton" onclick="plotgraph()" src="./images/graphbutton.svg" alt="" />
+            </div> -->
             <h3 class="task-title">Simulation</h3>
             <div class="canvas__div">
               <div class="img-div">
@@ -151,7 +159,10 @@
                 </div>
                 <div class="cross-img">
                   <img src="images/crossI.PNG" id="cross" style="display:block" alt="cross section" />
-                  
+                  <!-- <span class="tooltip sec-tooltip">
+                    ISMB: 100, h: 100mm, b: 75mm, t1: 4mm, t2: 7mm, Ixx: 257.5 cm<sup>4</sup>, Iyy: 40.8 cm<sup>4</sup>,
+    Area: 14.6 cm<sup>2</sup>,
+                  </span> -->
                   <img src="images\beam.PNG" id="beam" alt="" style="display:none;">
                 </div>
                 <div class="other-sec display-hide">
@@ -166,15 +177,28 @@
                 </div>
               </div>
               <div id="canvas-container" class="canvas__container">
-                <canvas id="canvas" class="canvas"></canvas>            
+                <canvas id="canvas" class="canvas"></canvas>
+               
+                <!-- <canvas id="canvas1" class="canvas"></canvas> -->
               </div>
               <div class="graph-div display-hide">
               
-                <canvas id="graphscreen1" class="canvas"></canvas>                       
+                <canvas id="graphscreen1" class="canvas"></canvas>
+            
+                 
+                
+                <!-- <img
+                      src="./images/slidergraph.PNG"               
+                       id="slidergraph"
+                
+                        /> -->
+                        <!-- <div id="constraintbox" ></div> -->
+                        
                <p class="cir-tooltip1"> </p>
 
                   <div id="tooltip" style="visibility: hidden;"></div>
-             
+                  <!-- <img id="sliderGraph" src="images/slidergraph.PNG" alt="Slider"/> -->
+                <!-- <div  class="constarint">hiiii</div> -->
                  
              
               </div>
@@ -210,19 +234,30 @@
                 <label >End Mass(kg)</label>
                 
               </div>
-            
+              <!-- <p id="coordinates">Mouse coordinates: x -</p> -->
             </div>
             </div>
           </div>
           <div id="comments" class="main__task-div" >
             <h3 class="task-title">Results</h3>
             <div class="settings-sections">
-              <div class="comment-sections">           
+              <div class="comment-sections">
+                <!-- <p id="p1">m = <span id="mass"></span></p>
+                <p id="p2">k = <span id="k"></span></p>
+                <p id="p3">c = <sapn id="c"></span></p>
+                <div id="omegavalues">
+                  <p>&#969;<sub>n</sub> = <span id="wn"></span></p>
+                  <p>&#969;<sub>d</sub> = <span id="wd"></span></p> 
+                </div>
+               
+                   -->
                  <P>Find logarithm decrement(δ) from displacement v/s time graph</P>
+
                   <div id="checkDiv">
-                    <input id="checkint" type="number" onkeydown=" handleKeyPress(event)"  >   
+                    <input id="checkint" type="number"  >   
                     <span id="checksapn" style="position:relative;left: 10%;"></span>   
-                  </div>           
+                  </div>
+            
                  <button id="checkbtn" onclick="checkans()" >
                   Check
                  </button>

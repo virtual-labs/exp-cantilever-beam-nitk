@@ -50,6 +50,8 @@ let mediaQuery1 = window.matchMedia("screen and (max-width: 540px)");
 let mediaQuery2 = window.matchMedia("screen and (max-width: 704px)");
 let mediaQuery3 = window.matchMedia("screen and (max-width: 820px)");
 let mediaQuery4 = window.matchMedia("screen and (max-width: 912px)");
+let mediaQuery5 = window.matchMedia("screen and (max-width: 1200px)");
+let mediaQuery6 = window.matchMedia("screen and (max-width: 1400px)");
 let scaleX = 0.5;
 let scaleY = 0.5;
 
@@ -78,7 +80,7 @@ var xaxis;
 
 //start of simulation here; starts the timer with increments of 0.01 seconds
 function startsim() {
-  simTimeId = setInterval("varupdate();time+=.01;", 10);
+  simTimeId = setInterval("varupdate();time+=.01;", 100);
 }
 // switches state of simulation between 0:Playing & 1:Paused
 function simstate() {
@@ -122,8 +124,8 @@ function varinit() {
     },
   });
 
-  console.log(disptime);
-  console.log(dispdisp);
+  // console.log(disptime);
+  // console.log(dispdisp);
 }
 function varchange() {
   varupdate();
@@ -180,11 +182,19 @@ const setMediaQueries = function (ctx) {
   } else if (mediaQuery3.matches) {
     scaleX = 1;
     originalX = canvas.width / 4 - 10;
-    scaleY = 0.4;
+    scaleY = 0.5;
   } else if (mediaQuery4.matches) {
     scaleX = 1;
     originalX = canvas.width / 4 - 10;
-    scaleY = 0.4;
+    scaleY = 0.6;
+  } else if (mediaQuery5.matches) {
+    scaleX = 1;
+    originalX = canvas.width / 4 - 10;
+    scaleY = 0.6;
+  }else if (mediaQuery6.matches) {
+    scaleX = 0.4;
+    originalX = canvas.width / 4 - 10;
+    scaleY = 0.5;
   } else {
     // originalX = canvas.width / 4 - 20;
     scaleX = 0.3;
@@ -271,8 +281,8 @@ function generateGraph(x, y) {
   graphctx1.rotate(-Math.PI / 2);
   graphctx1.fillText("Displacement", -60, 15);
   graphctx1.restore();
-  graphctx1.fillText("Time", 150, 250);
-  graphctx1.beginPath();
+  graphctx1.fillText("Time", 150, 230);
+
 
   graphctx1.moveTo(20, 20);
   graphctx1.lineTo(20, 250);
@@ -306,14 +316,20 @@ function generateGraph(x, y) {
 
   let timestr = "Time: " + (disptime * 1000).toFixed(2) + " ms";
 
-  graphctx1.fillText(dispstr, 5, 280);
-  graphctx1.fillText(timestr, 200, 280);
+  graphctx1.fillText(dispstr, 5, 260);
+  graphctx1.fillText(timestr, 200, 260);
   ///////////////////////////////////////////////////
   // graphctx1.beginPath();
   // graphctx1.strokeStyle = "red";
   // graphctx1.moveTo(30, 100);
   // graphctx1.lineTo(30, 350);
   // graphctx1.stroke();
+  graphctx1.font="bold 1.26rem Nunito, sans-serif"
+  graphctx1.fillStyle="red";
+  
+  graphctx1.fillText("Note: Hover on the graph to display the Displacement and TIme", 0, 15)
+  // graphctx1.fillText("and Time", 0, 50);
+  graphctx1.beginPath();
 
   ///////////////////////////////////////////////
   // Graph 2
@@ -334,7 +350,7 @@ function generateGraph(x, y) {
   graphctx2.rotate(-Math.PI / 2);
   graphctx2.fillText("Amplitude", 170, 5);
   graphctx2.restore();
-  graphctx2.fillText("Frequency(rad/s)", 10, 280);
+  graphctx2.fillText("Frequency(rad/s)", 20, 250);
   graphctx2.strokeStyle = "#800080";
   graphctx2.lineWidth = 1;
   graphctx2.moveTo(350, 345);
@@ -388,7 +404,7 @@ function handleMove(event) {
 
   disptime = (0.9 / 295) * (xaxis - 28);
   dispdisp = actdisplace(disptime);
-  console.log(dispdisp);
+  // console.log(dispdisp);
 }
 // function drawGraph(x, y) {
 //   // Add your graph drawing logic here, using the adjusted x value
@@ -426,7 +442,7 @@ function toggleImg() {
   restart.style.display = restart.style.display === "none" ? "block" : "none";
 }
 $("#graphbutton").click(function () {
-  console.log("clicked");
+  // console.log("c/licked");
 });
 // Get the input element
 const checkintInput = document.getElementById("checkint");
@@ -447,7 +463,7 @@ function checkans() {
 
   // Convert dampingratio to a number
   let dampingRatioNumber = parseFloat(dampingratio);
-  console.log("Damping Ratio:", dampingRatioNumber);
+  // console.log("Damping Ratio:", dampingRatioNumber);
 
   // Check if the answer matches the damping ratio
   if (ans.toFixed(1) === dampingRatioNumber.toFixed(1)) {
@@ -487,11 +503,11 @@ function printcordinates(x, xaxisValue) {
   // const {x}  = getCoordinates(event);
 
   xaxisValue = ` ${x.toFixed(2)}`;
-  console.log(xaxisValue);
+  // console.log(xaxisValue);
   // disptime = 0.9/295*(x-28);
   // dispdisp = actdisplace(disptime)
 
-  console.log(dispdisp);
+  // console.log(dispdisp);
 }
 
 window.addEventListener("load", varinit);
@@ -614,7 +630,7 @@ function randomize() {
       break;
   }
   beamlength = Math.floor(Math.random() * 2001) + 1000;
-  console.log(beamlength);
+  // console.log(beamlength);
   endmass = Math.floor(Math.random() * 200);
   dampingratio = (Math.random() * 0.5).toFixed(2);
   // let lengthtxt = document.getElementById("lengthtxt");

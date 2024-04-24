@@ -53,6 +53,8 @@ let mediaQuery1 = window.matchMedia("screen and (max-width: 540px)");
 let mediaQuery2 = window.matchMedia("screen and (max-width: 704px)");
 let mediaQuery3 = window.matchMedia("screen and (max-width: 820px)");
 let mediaQuery4 = window.matchMedia("screen and (max-width: 912px)");
+let mediaQuery5 = window.matchMedia("screen and (max-width: 1200px)");
+let mediaQuery6 = window.matchMedia("screen and (max-width: 1400px)");
 let scaleX = 0.5;
 let scaleY = 0.5;
 
@@ -84,7 +86,7 @@ console.log(dispdisp);
 
 //start of simulation here; starts the timer with increments of 0.01 seconds
 function startsim() {
-  simTimeId = setInterval("varupdate();time+=.01;", 10);
+  simTimeId = setInterval("varupdate();time+=.01;", 100);
 }
 // switches state of simulation between 0:Playing & 1:Paused
 function simstate() {
@@ -145,7 +147,11 @@ function varupdate() {
   let cc = 2 * Math.sqrt(k * m);
   let c = dampingratio * cc;
   wd = wn * Math.sqrt(1 - dampingratio * dampingratio);
-
+  // document.querySelector("#mass").innerHTML = m.toFixed(4) + "kg"; //Displaying values
+  // document.querySelector("#k").innerHTML = (k / 1000).toFixed(4) + "N/mm";
+  // document.querySelector("#c").innerHTML = c.toFixed(4) + "Ns/m";
+  // document.querySelector("#wd").innerHTML = wd.toFixed(4) + "rad/s";
+  // document.querySelector("#wn").innerHTML = wn.toFixed(4) + "rad/s";
   
   document.getElementById("matname").innerHTML = matname;
   document.getElementById("secname").innerHTML = secname;
@@ -155,8 +161,9 @@ function varupdate() {
     4
   )}Ns/m \n k = ${(k / 1000).toFixed(4)}N/mm
   `;
-  cirTooltip1.innerHTML = 'Note: Hover on the graph to display the Displacement and Time';
- 
+  // cirTooltip1.innerHTML = 'Note: Hover on the graph to display the Displacement and Time';
+  // console.log(beamlength);
+  //If simulation is running
   if (!simstatus) {
     //Disabling the slider,spinner and drop down menu
 
@@ -184,11 +191,19 @@ const setMediaQueries = function (ctx) {
   } else if (mediaQuery3.matches) {
     scaleX = 1;
     originalX = canvas.width / 4 - 10;
-    scaleY = 0.4;
+    scaleY = 0.6;
   } else if (mediaQuery4.matches) {
     scaleX = 1;
     originalX = canvas.width / 4 - 10;
-    scaleY = 0.4;
+    scaleY = 0.7;
+  }else if (mediaQuery5.matches) {
+    scaleX = 0.8;
+    originalX = canvas.width / 4 - 10;
+    scaleY = 0.7;
+  }else if (mediaQuery6.matches) {
+    scaleX = 0.4;
+    originalX = canvas.width / 4 - 10;
+    scaleY = 0.5;
   } else {
     // originalX = canvas.width / 4 - 20;
     scaleX = 0.3;
@@ -253,60 +268,79 @@ const draw = function () {
   ball.draw();
   generateGraph();
 };
+const img = new Image();
 
+// Set the source of the image
+img.src = '/images/slidergraph.PNG';  
 function generateGraph( x, y) {
   // Graph 1
-
+  // var canvas1 = document.getElementById("graphscreen1");
+  // var ctx1 = canvas1.getContext("2d");
 
   let graph1X = setMediaQueries(graphctx1);
   graphctx1.canvas.width = document.documentElement.clientWidth * scaleX;
   graphctx1.canvas.height = document.documentElement.clientHeight * scaleY;
   graphctx1.clearRect(0, 0, graphCanvas1.width, graphCanvas1.height);
+  // graphctx1.drawImage(img, 0, 80);
+//  graphctx1.drawImage(img, 0, 55);
 
 
   graphctx1.font = "2rem Comic sans MS";
   graphctx1.save();
   graphctx1.translate(0, 225);
   graphctx1.rotate(-Math.PI / 2);
-  graphctx1.fillText("Displacement", -10, 15);
+  graphctx1.fillText("Displacement", 0, 15);
   graphctx1.restore();
-  graphctx1.fillText("Time", 150, 290);
+  graphctx1.fillText("Time", 150, 350);
   graphctx1.beginPath();
 
-  graphctx1.moveTo(20, 50);
-  graphctx1.lineTo(20, 300);
-  graphctx1.moveTo(20, 175);
-  graphctx1.lineTo(graphCanvas1.width, 175);
- 
+  graphctx1.moveTo(20, 100);
+  graphctx1.lineTo(20, 350);
+  graphctx1.moveTo(20, 225);
+  graphctx1.lineTo(graphCanvas1.width, 225);
+  graphctx1.moveTo(20,350)
+  graphctx1.lineTo(graphCanvas1.width, 350);
 
   graphctx1.strokeStyle = "black";
   graphctx1.stroke();
   graphctx1.closePath();
 
   graphctx1.beginPath();
-  graphctx1.moveTo(20, 175);
+  graphctx1.moveTo(20, 225);
   let i = 0;
   graphctx1.strokeStyle = "green";
   graphctx1.lineWidth = 1;
   while (i < graphCanvas1.width ) {
-    graphctx1.lineTo(i + 20, 175 - (0.9 * actdisplace(0.003 * i)) / 5);
-    graphctx1.moveTo(i + 20, 175 - (0.9 * actdisplace(0.003 * i)) / 5);
+    graphctx1.lineTo(i + 20, 225 - (0.9 * actdisplace(0.003 * i)) / 5);
+    graphctx1.moveTo(i + 20, 225 - (0.9 * actdisplace(0.003 * i)) / 5);
     i += 0.01;
   }
   graphctx1.stroke();
  
   graphctx1.font='12px Nunit';
 
-          
+            // graphctx1.fillText("\u03C9d="+wd.toFixed(3)+"rad/s",430,370);
             graphctx1.font='16px Comic Sans MS';
             let dispstr = "Displacement: " + (dispdisp/5).toFixed(2) + " mm";
           
             let timestr = "Time: " + (disptime*1000).toFixed(2) + " ms";
           
-            graphctx1.fillText(dispstr,30,310);
-            graphctx1.fillText(timestr,240,310);
+            graphctx1.fillText(dispstr,10,370);
+            graphctx1.fillText(timestr,240,370);
+///////////////////////////////////////////////////
+            // graphctx1.beginPath();
+            // graphctx1.strokeStyle = "red";
+            // graphctx1.moveTo(30, 100);
+            // graphctx1.lineTo(30, 350);
+            // graphctx1.stroke();
+            graphctx1.font="bold 1.26rem Nunito, sans-serif"
+            graphctx1.fillStyle="red";
+            
+            graphctx1.fillText("Note: Hover on the graph to display the Displacement and TIme", 0, 15)
 
-           
+
+
+  ///////////////////////////////////////////////          
   // Graph 2
   let graph2X = setMediaQueries(graphctx2);
   graphctx2.canvas.width = document.documentElement.clientWidth * scaleX;
@@ -315,17 +349,17 @@ function generateGraph( x, y) {
   graphctx2.font = "2rem Comic sans MS";
   graphctx2.beginPath();
   graphctx2.strokeStyle = "black";
-  graphctx2.moveTo(20, 230);
-  graphctx2.lineTo(20, 35);
-  graphctx2.moveTo(20, 230);
-  graphctx2.lineTo(520, 230);
+  graphctx2.moveTo(20, 330);
+  graphctx2.lineTo(20, 135);
+  graphctx2.moveTo(20, 330);
+  graphctx2.lineTo(520, 330);
   graphctx2.stroke();
   graphctx2.save();
   graphctx2.translate(10, 345);
   graphctx2.rotate(-Math.PI / 2);
-  graphctx2.fillText("Amplitude", 170, 5);
+  graphctx2.fillText("Amplitude", 45, 5);
   graphctx2.restore();
-  graphctx2.fillText("Frequency(rad/s)", 10, 280);
+  graphctx2.fillText("Frequency(rad/s)", 170, 350);
   graphctx2.strokeStyle = "#800080";
   graphctx2.lineWidth = 1;
   graphctx2.moveTo(350, 345);
@@ -335,23 +369,23 @@ function generateGraph( x, y) {
   let j = 0;
   graphctx2.beginPath();
   while (j < 300) {
-    graphctx2.lineTo(j + 50, 225 - 0.9 * amplitude(0.01 * j));
-    graphctx2.moveTo(j + 50, 225 - 0.9 * amplitude(0.01 * j));
+    graphctx2.lineTo(j + 50, 325 - 0.9 * amplitude(0.01 * j));
+    graphctx2.moveTo(j + 50, 325 - 0.9 * amplitude(0.01 * j));
     j += 0.01;
   }
   graphctx2.stroke();
   graphctx2.beginPath();
   graphctx2.strokeStyle = "green";
-  graphctx2.moveTo(150, 260);
-  graphctx2.lineTo(150, 45);
+  graphctx2.moveTo(150, 360);
+  graphctx2.lineTo(150, 100);
   graphctx2.stroke();
   graphctx2.font = "2rem Comic sans MS";
-  graphctx2.fillText("\u03C9d= " + wd.toFixed(3) + "rad/s", 100, 40);
+  graphctx2.fillText("\u03C9d= " + wd.toFixed(3) + "rad/s", 200, 300);
 
   graphctx1.beginPath();
-  graphctx1.strokeStyle = "black";
+  graphctx1.strokeStyle= "black";
   graphctx1.moveTo(x, y);
-  graphctx1.lineTo(x, y + 70);
+  graphctx1.lineTo(x , y + 70);
   graphctx1.stroke();
 
 }
@@ -367,23 +401,32 @@ function generateGraph( x, y) {
 function handleMove(event) {
   const { x, y } = getCoordinates(event);
 
- 
+  // tooltip.innerHTML = `x: ${x.toFixed(2)} - y: ${y.toFixed(2)}`;
+  // tooltip.style.display = 'block';
   var xaxis =  ` ${x.toFixed(2)}`;
+//   coordinatesElement.textContent = xaxis;
+// console.log(xaxis);
+
+  // Shift the tooltip 20 pixels to the right
+  // tooltip.style.left = `${x + 20}px`;
+  // tooltip.style.top = `${y - 30}px`;
 
   disptime = 0.9/295*(xaxis-28);
   dispdisp = actdisplace(disptime) 
- 
+  console.log(dispdisp);
 
 
   
 }
-function handleKeyPress(event) {
-  // Check if the pressed key is "Enter"
-  if (event.key === 'Enter') {
-      // Perform your desired action here
-      checkans();
-  }
-}
+// function drawGraph(x, y) {
+//   // Add your graph drawing logic here, using the adjusted x value
+//   // For example:
+//   graphctx1.beginPath();
+//   graphctx1.strokeStyle= "black";
+//   graphctx1.moveTo(x, y);
+//   graphctx1.lineTo(x , y + 50);
+//   graphctx1.stroke();
+// }
 
 function handleEnd() {
   tooltip.style.display = 'none';
@@ -460,12 +503,15 @@ function changescreen1(){
   
 }
 function printcordinates(x,xaxisValue){
+  // const {x}  = getCoordinates(event);
 
+  
+  xaxisValue = ` ${x.toFixed(2)}`;
   console.log(xaxisValue  );
-  disptime = 0.9/295*(x-28);
-  dispdisp = actdisplace(disptime) 
+  // disptime = 0.9/295*(x-28);
+  // dispdisp = actdisplace(disptime) 
 
-
+console.log(dispdisp);
 }
 
   
@@ -518,6 +564,7 @@ const selectSection = function () {
   }
 };
 function randomize(){
+  // document.getElementById("slidergraph").style.left = "0px"; 0
   disptime = 0;
   dispdisp = 500;
   document.getElementById("checkint").value="";
@@ -599,9 +646,10 @@ beamlength =  Math.floor(Math.random() * (2001)) + 1000;
 console.log(beamlength);
 endmass =  Math.floor(Math.random() * (200));
 dampingratio = (Math.random()*0.5).toFixed(2);
-
+// let lengthtxt = document.getElementById("lengthtxt");
+// lengthtxt.innerHTML = " " + beamlength;
 }
-
+// sections.addEventListener("change", selectSection);
 const selectMaterial = function () {
   let value = materials.value;
   const infos = Object.entries(matInfo[value]);
@@ -618,4 +666,4 @@ const selectMaterial = function () {
   }
   varupdate();
 };
-
+// materials.addEventListener("change", selectMaterial);
